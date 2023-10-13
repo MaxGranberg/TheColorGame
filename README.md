@@ -1,5 +1,5 @@
 # TheColorGame
-Guess the Color Game is a web application that combines play with learning, focusing on enhancing the user's understanding of RGB color values.
+TheColorGame is a web application that combines play with learning, focusing on enhancing the user's understanding of RGB color values.
 
 ## Features
 - **Basic Game Mode**: Players are presented with a randomly generated RGB value and must try to guess the color.
