@@ -3,13 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "npx eslint ./src || exit 0",
+    "lint:fix": "npx eslint ./src --fix || exit 0"
   },
   "keywords": [],
   "author": "Max Granberg <mg224em@student.lnu.se>",
   "license": "MIT",
   "devDependencies": {
-    "@lnu/eslint-config": "^1.1.10"
+    "@lnu/eslint-config": "^1.1.10",
+    "vite": "^4.4.11"
+  },
+  "dependencies": {
+    "randomly-generate": "^1.0.3"
   }
 }
