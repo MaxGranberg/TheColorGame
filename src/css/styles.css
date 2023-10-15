@@ -11,3 +11,20 @@ body {
 	justify-content: center;
 	height: 100%;
 }
+
+.container {
+	border: 2px solid grey;
+	display:flex;
+	flex-direction: row;
+	justify-content: center;
+	padding: 10px;
+	height: min-content;
+	margin: 2px;
+}
+
+.option {
+	border: 2px solid black;
+	height: 80px;
+	width: 80px;
+	margin: 10px;
+}

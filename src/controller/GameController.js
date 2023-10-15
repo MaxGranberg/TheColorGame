@@ -5,6 +5,7 @@ import RandomColor from '../model/RandomColor.js'
  *
  */
 export default class GameController {
+  rgbStringToGuess
   /**
    * Initializes a new instance of the GameController class.
    *
@@ -22,9 +23,11 @@ export default class GameController {
    * Start the game by showing rgb string to guess.
    */
   startGame () {
-    const rgbStringToGuess = this.randomColorModel.rgbString
-    this.gameView.displayRgbString(rgbStringToGuess)
-    // TODO: set up color options here, or atleast call the function that does it.
+    this.rgbStringToGuess = this.randomColorModel.getRgbString()
+    this.gameView.displayRgbString(this.rgbStringToGuess)
+
+    const answerOptions = this.randomColorModel.getAnswerOptions()
+    this.gameView.updateAnswerOptionColors(answerOptions)
   }
 
   /**
@@ -34,7 +37,7 @@ export default class GameController {
    */
   handleClickOnOptions (event) {
     const userChoice = event.target.style.backgroundColor
-    if (userChoice === this.randomColorModel.rgbString) {
+    if (userChoice.replace(/\s/g, '') === this.rgbStringToGuess) { // TODO: Probably fix module so it adds whitespaces to the rgb strings!
       this.gameView.showSuccessFeedback()
       // TODO: handle correct guess, proceed to next round.
     } else {
