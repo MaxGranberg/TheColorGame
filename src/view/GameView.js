@@ -6,9 +6,9 @@ class GameView {
    * Initializes a new instance of the GameView class.
    */
   constructor () {
-    this.rgbValueToGuess = document.querySelector('.rgbValueToGuess')
+    this.rgbValueToGuess = document.querySelector('#rgbValueToGuess')
     this.answerOptions = document.querySelectorAll('.option')
-    this.feedbackMessage = document.querySelector('.feedback')
+    this.feedbackMessage = document.querySelector('#feedback')
   }
 
   /**
