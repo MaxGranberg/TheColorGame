@@ -9,6 +9,7 @@ class ColorThemeView {
     this.navbar = document.querySelector('#navbar')
     this.changeColorButton = document.querySelector('#changeColorBtn')
     this.rgbStringToGuess = document.querySelector('#rgbStringToGuess')
+    this.gamemodeButtons = document.querySelectorAll('.gamemodeButton')
   }
 
   /**
@@ -26,8 +27,20 @@ class ColorThemeView {
    * @param {string} newColor - The color to change to.
    */
   updateColorTheme (newColor) {
+    this.changeGamemodeButtonColor(newColor)
     this.changeNavbarColor(newColor)
     this.changeRgbStringColor(newColor)
+  }
+
+  /**
+   * Changes the color of the gamemode buttons to a random one.
+   *
+   * @param {string} newColor - The color to change to.
+   */
+  changeGamemodeButtonColor (newColor) {
+    this.gamemodeButtons.forEach(button => {
+      button.style.backgroundColor = newColor
+    })
   }
 
   /**
