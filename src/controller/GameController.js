@@ -28,9 +28,22 @@ export default class GameController {
     this.rgbStringToGuess = this.randomColorModel.getRgbString()
     this.gameView.displayRgbString(this.rgbStringToGuess)
 
-    let answerOptions = this.randomColorModel.getAnswerOptions()
-    answerOptions = this.shuffleAnswerOptions(answerOptions)
+    const answerOptions = this.generateAnswerOptions()
     this.gameView.updateAnswerOptionColors(answerOptions)
+  }
+
+  /**
+   * Generate the answer options for the game.
+   *
+   * @returns {Array} - An array of rgb strings.
+   */
+  generateAnswerOptions () {
+    const answerOption1 = this.randomColorModel.colorGenerator.generateRandomRGBColor()
+    const answerOption2 = this.randomColorModel.colorGenerator.generateRandomRGBColor()
+    const answerOption3 = this.rgbStringToGuess
+    const answerOptions = [answerOption1, answerOption2, answerOption3]
+
+    return this.shuffleAnswerOptions(answerOptions)
   }
 
   /**
