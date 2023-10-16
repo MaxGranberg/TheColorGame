@@ -6,6 +6,7 @@ class GameView {
    * Initializes a new instance of the GameView class.
    */
   constructor () {
+    this.score = document.querySelector('#score')
     this.rgbValueToGuess = document.querySelector('#rgbValueToGuess')
     this.answerOptions = document.querySelectorAll('.option')
     this.feedbackMessage = document.querySelector('#feedback')
@@ -40,6 +41,15 @@ class GameView {
     this.answerOptions.forEach(option => {
       option.addEventListener('click', callback)
     })
+  }
+
+  /**
+   * Updates the current score for the user.
+   *
+   * @param {number} score - How many correct guesses the user currently has.
+   */
+  updateScore (score) {
+    this.score.textContent = `Score: ${score}`
   }
 
   /**

@@ -16,6 +16,8 @@ export default class GameController {
     this.gameView = view
     this.randomColorModel = model
 
+    this.score = 0
+
     this.gameView.addEventListenerToOptions(this.handleClickOnOptions.bind(this))
   }
 
@@ -39,6 +41,8 @@ export default class GameController {
     const userChoice = event.target.style.backgroundColor
     if (userChoice.replace(/\s/g, '') === this.rgbStringToGuess) { // TODO: Probably fix module so it adds whitespaces to the rgb strings!
       this.gameView.showSuccessFeedback()
+      this.score++
+      this.gameView.updateScore(this.score)
       // TODO: handle correct guess, proceed to next round.
     } else {
       this.gameView.showFailureFeedback()
