@@ -23,6 +23,13 @@ class RandomColor {
   }
 
   /**
+   * Generates a new rgb color string.
+   */
+  generateNewRgbString () {
+    this.rgbStringOfColor = this.colorGenerator.generateRandomRGBColor()
+  }
+
+  /**
    * Get the answer options for the game, maybe move this to controller?
    *
    * @returns {Array} - An array of rgb strings.
@@ -30,7 +37,7 @@ class RandomColor {
   getAnswerOptions () {
     const answerOption1 = this.colorGenerator.generateRandomRGBColor()
     const answerOption2 = this.colorGenerator.generateRandomRGBColor()
-    const answerOption3 = this.getRgbString()
+    const answerOption3 = this.rgbStringOfColor
     return [answerOption1, answerOption2, answerOption3]
   }
 }

@@ -41,12 +41,33 @@ export default class GameController {
     const userChoice = event.target.style.backgroundColor
     if (userChoice.replace(/\s/g, '') === this.rgbStringToGuess) { // TODO: Probably fix module so it adds whitespaces to the rgb strings!
       this.gameView.showSuccessFeedback()
-      this.score++
-      this.gameView.updateScore(this.score)
+
+      this.updateScore()
+
+      setTimeout(() => {
+        this.startNewRound()
+      }, 1000)
+
       // TODO: handle correct guess, proceed to next round.
     } else {
       this.gameView.showFailureFeedback()
       // TODO: handle wrong guess, restart game/show score
     }
+  }
+
+  /**
+   * Updates the users score.
+   */
+  updateScore () {
+    this.score++
+    this.gameView.updateScore(this.score)
+  }
+
+  /**
+   * Starts a new round by generating a new rgb string to guess.
+   */
+  startNewRound () {
+    this.randomColorModel.generateNewRgbString()
+    this.startGame()
   }
 }
