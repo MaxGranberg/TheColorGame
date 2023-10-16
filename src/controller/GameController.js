@@ -28,8 +28,24 @@ export default class GameController {
     this.rgbStringToGuess = this.randomColorModel.getRgbString()
     this.gameView.displayRgbString(this.rgbStringToGuess)
 
-    const answerOptions = this.randomColorModel.getAnswerOptions()
+    let answerOptions = this.randomColorModel.getAnswerOptions()
+    answerOptions = this.shuffleAnswerOptions(answerOptions)
     this.gameView.updateAnswerOptionColors(answerOptions)
+  }
+
+  /**
+   * Shuffle the answer options so they aren't in the same order every round.
+   * Uses the Fisher-Yates sorting algorithm.
+   *
+   * @param {Array} options - An array of the answer options as rgb strings.
+   * @returns {Array} options - A shuffled version of the array.
+   */
+  shuffleAnswerOptions (options) {
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]]
+    }
+    return options
   }
 
   /**
