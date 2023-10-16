@@ -17,7 +17,8 @@ export default class GameController {
     this.gameView = view
 
     this.score = 0
-    this.bestScore = 0
+    this.bestScore = localStorage.getItem('bestScore') || 0
+    this.updateBestScore(this.score)
 
     this.gameView.addEventListenerToOptions(this.handleClickOnOptions.bind(this))
   }
@@ -89,6 +90,7 @@ export default class GameController {
 
     if (this.bestScore < this.score) {
       this.bestScore = this.score
+      localStorage.setItem('bestScore', this.bestScore)
     }
   }
 
