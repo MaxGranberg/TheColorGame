@@ -39,6 +39,7 @@ body {
 	color: white;
 	font-size: 1.5em;
 	font-family: 'Roboto', sans-serif;
+	text-shadow: 1px 0  rgba(0, 0, 0, 0.2), -1px 0 rgba(0, 0, 0, 0.2), 0 1px  rgba(0, 0, 0, 0.2), 0 -1px  rgba(0, 0, 0, 0.2);
 }
 
 #changeColorBtn {
@@ -53,6 +54,8 @@ body {
 	cursor: pointer;
 	outline: none;
 	margin-right: auto;
+	text-shadow: 1px 0  rgba(0, 0, 0, 0.2), -1px 0 rgba(0, 0, 0, 0.2), 0 1px  rgba(0, 0, 0, 0.2), 0 -1px  rgba(0, 0, 0, 0.2);
+	box-shadow: 1px 0  rgba(0, 0, 0, 0.2), -1px 0 rgba(0, 0, 0, 0.5), 0 1px  rgba(0, 0, 0, 0.5), 0 -1px  rgba(0, 0, 0, 0.5);;
 }
 
 #changeColorBtn:hover {
@@ -65,21 +68,28 @@ body {
 	transform: translateY(0);
 }
 
-h1 {
-	font-size: 1.5em;
+#score {
+	font-family: 'Roboto', sans-serif;
+	font-style: italic;
 	color: #333;
-	margin-bottom: 30px;
+}
+
+h1 {
+	font-size: 1.3em;
+	margin-top: -10px;
+	color: #333;
+	margin-bottom: 10px;
 	font-family: 'Roboto', sans-serif;
 }
 
 #rgbStringToGuess {
-	font-size: 1.7em;
+	font-size: 1.8em;
 	font-weight: 600;
 	color: #007BFF;
-	padding: 0 10px;
 	border-radius: 4px;
 	background-color: #f1f1f1;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	text-shadow: 1px 0  rgba(0, 0, 0, 0.5), -1px 0 rgba(0, 0, 0, 0.5), 0 1px  rgba(0, 0, 0, 0.5), 0 -1px  rgba(0, 0, 0, 0.5);
 }
 
 .container {

@@ -77,10 +77,7 @@ export default class GameController {
     }
 
     this.updateScore()
-
-    setTimeout(() => {
-      this.startNewRound()
-    }, 1000)
+    this.startNewRound()
   }
 
   /**
