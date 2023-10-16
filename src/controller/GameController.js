@@ -38,8 +38,8 @@ export default class GameController {
    * @returns {Array} - An array of rgb strings.
    */
   generateAnswerOptions () {
-    const answerOption1 = this.randomColorModel.colorGenerator.generateRandomRGBColor()
-    const answerOption2 = this.randomColorModel.colorGenerator.generateRandomRGBColor()
+    const answerOption1 = this.randomColorModel.generateRandomRgbColor()
+    const answerOption2 = this.randomColorModel.generateRandomRgbColor()
     const answerOption3 = this.rgbStringToGuess
     const answerOptions = [answerOption1, answerOption2, answerOption3]
 

@@ -28,6 +28,15 @@ class RandomColor {
   generateNewRgbString () {
     this.rgbStringOfColor = this.colorGenerator.generateRandomRGBColor()
   }
+
+  /**
+   * Generates a random rgb color string.
+   *
+   * @returns {string} - the rgb string of the color.
+   */
+  generateRandomRgbColor () {
+    return this.colorGenerator.generateRandomRGBColor()
+  }
 }
 
 export default RandomColor

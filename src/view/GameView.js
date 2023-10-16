@@ -7,7 +7,7 @@ class GameView {
    */
   constructor () {
     this.score = document.querySelector('#score')
-    this.rgbValueToGuess = document.querySelector('#rgbValueToGuess')
+    this.rgbStringToGuess = document.querySelector('#rgbStringToGuess')
     this.answerOptions = document.querySelectorAll('.option')
     this.feedbackMessage = document.querySelector('#feedback')
   }
@@ -18,7 +18,7 @@ class GameView {
    * @param {string} rgbString - The RGB string the user will guess on.
    */
   displayRgbString (rgbString) {
-    this.rgbValueToGuess.textContent = rgbString
+    this.rgbStringToGuess.textContent = rgbString
   }
 
   /**
