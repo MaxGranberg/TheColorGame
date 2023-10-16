@@ -1,7 +1,8 @@
-html, body {
+html,
+body {
 	height: 100%;
-	margin: 0; 
-	overflow: hidden; 
+	margin: 0;
+	overflow: hidden;
 }
 
 body {
@@ -20,31 +21,48 @@ body {
 
 #navbar {
 	display: flex;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #007BFF;
-  padding: 10px 0;
-  z-index: 10;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #007BFF;
+	padding: 10px 0;
+	z-index: 10;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 	justify-content: space-between;
-  align-items: center;
+	align-items: center;
 }
 
 .nav-content {
-  width: 80%;
-  margin: 0 auto;
-  color: white;
-  font-size: 1.5em;
-  font-family: 'Roboto', sans-serif;
+	width: 80%;
+	margin: 0 auto;
+	color: white;
+	font-size: 1.5em;
+	font-family: 'Roboto', sans-serif;
 }
 
 #changeColorBtn {
-  background: none;
-  border: none;
-  font-size: 1em;
-  cursor: pointer;
+	background-color: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	color: white;
+	padding: 6px 12px;
+	border-radius: 4px;
+	font-size: 1em;
+	font-family: 'Roboto', sans-serif;
+	transition: background-color 0.2s, transform 0.2s;
+	cursor: pointer;
+	outline: none;
+	margin-right: auto;
+}
+
+#changeColorBtn:hover {
+	background-color: rgba(255, 255, 255, 0.2);
+	transform: translateY(-2px);
+}
+
+#changeColorBtn:active {
+	background-color: rgba(255, 255, 255, 0.3);
+	transform: translateY(0);
 }
 
 h1 {
