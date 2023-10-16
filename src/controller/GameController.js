@@ -5,16 +5,16 @@ import RandomColor from '../model/RandomColor.js'
  *
  */
 export default class GameController {
-  rgbStringToGuess
+  #rgbStringToGuess
   /**
    * Initializes a new instance of the GameController class.
    *
-   * @param {GameView} view - The view instance.
    * @param {RandomColor} model - The model instance.
+   * @param {GameView} view - The view instance.
    */
-  constructor (view, model) {
-    this.gameView = view
+  constructor (model, view) {
     this.randomColorModel = model
+    this.gameView = view
 
     this.score = 0
 
@@ -25,8 +25,8 @@ export default class GameController {
    * Start the game by showing rgb string to guess.
    */
   startGame () {
-    this.rgbStringToGuess = this.randomColorModel.getRgbString()
-    this.gameView.displayRgbString(this.rgbStringToGuess)
+    this.#rgbStringToGuess = this.randomColorModel.getRgbString()
+    this.gameView.displayRgbString(this.#rgbStringToGuess)
 
     const answerOptions = this.generateAnswerOptions()
     this.gameView.updateAnswerOptionColors(answerOptions)
@@ -38,9 +38,9 @@ export default class GameController {
    * @returns {Array} - An array of rgb strings.
    */
   generateAnswerOptions () {
-    const answerOption1 = this.randomColorModel.generateRandomRgbColor()
-    const answerOption2 = this.randomColorModel.generateRandomRgbColor()
-    const answerOption3 = this.rgbStringToGuess
+    const answerOption1 = this.randomColorModel.generateRgbString()
+    const answerOption2 = this.randomColorModel.generateRgbString()
+    const answerOption3 = this.#rgbStringToGuess
     const answerOptions = [answerOption1, answerOption2, answerOption3]
 
     return this.shuffleAnswerOptions(answerOptions)
@@ -68,7 +68,7 @@ export default class GameController {
    */
   handleClickOnOptions (event) {
     const userChoice = event.target.style.backgroundColor
-    if (userChoice.replace(/\s/g, '') === this.rgbStringToGuess) { // TODO: Probably fix module so it adds whitespaces to the rgb strings!
+    if (userChoice.replace(/\s/g, '') === this.#rgbStringToGuess) { // TODO: Probably fix module so it adds whitespaces to the rgb strings!
       this.gameView.showSuccessFeedback()
       this.score++
     } else {
@@ -91,7 +91,7 @@ export default class GameController {
    * Starts a new round by generating a new rgb string to guess.
    */
   startNewRound () {
-    this.randomColorModel.generateNewRgbString()
+    this.randomColorModel.updateRgbString()
     this.startGame()
   }
 }

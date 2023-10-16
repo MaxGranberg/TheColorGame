@@ -1,28 +1,31 @@
-import RandomColor from '../model/RandomColor.js'
-
 /**
  *
  */
 class ColorThemeView {
   /**
    * Initializes a new instance of the ColorThemeView class.
-   *
-   * @param {RandomColor} randomColorModel - The model.
    */
-  constructor (randomColorModel) {
+  constructor () {
     this.navbar = document.querySelector('#navbar')
     this.changeColorButton = document.querySelector('#changeColorBtn')
     this.rgbStringToGuess = document.querySelector('#rgbStringToGuess')
-    this.randomColorModel = randomColorModel
+  }
 
-    this.changeColorButton.addEventListener('click', () => { this.changeColorTheme() })
+  /**
+   * Add eventlistener to the button for changing color theme.
+   *
+   * @param {Function} callback - The callback to execute when the button is clicked.
+   */
+  addEventListenerToButton (callback) {
+    this.changeColorButton.addEventListener('click', callback)
   }
 
   /**
    * Changes the color theme of the whole appication.
+   *
+   * @param {string} newColor - The color to change to.
    */
-  changeColorTheme () {
-    const newColor = this.randomColorModel.generateRandomRgbColor()
+  updateColorTheme (newColor) {
     this.changeNavbarColor(newColor)
     this.changeRgbStringColor(newColor)
   }
