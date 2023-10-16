@@ -17,6 +17,7 @@ export default class GameController {
     this.gameView = view
 
     this.score = 0
+    this.#rgbStringToGuess = this.randomColorModel.getRgbString()
 
     this.gameView.addEventListenerToOptions(this.handleClickOnOptions.bind(this))
   }
@@ -25,7 +26,6 @@ export default class GameController {
    * Start the game by showing rgb string to guess.
    */
   startGame () {
-    this.#rgbStringToGuess = this.randomColorModel.getRgbString()
     this.gameView.displayRgbString(this.#rgbStringToGuess)
 
     const answerOptions = this.generateAnswerOptions()
@@ -67,17 +67,31 @@ export default class GameController {
    * @param {Event} event - A click event
    */
   handleClickOnOptions (event) {
-    const userChoice = event.target.style.backgroundColor
-    if (userChoice.replace(/\s/g, '') === this.#rgbStringToGuess) { // TODO: Probably fix module so it adds whitespaces to the rgb strings!
-      this.gameView.showSuccessFeedback()
-      this.score++
+    const userChoice = event.target.style.backgroundColor.replace(/\s/g, '') // TODO: Probably fix module so it adds whitespaces to the rgb strings instead!
+    if (userChoice === this.#rgbStringToGuess) {
+      this.handleCorrectGuess()
     } else {
-      this.gameView.showFailureFeedback()
-      this.score = 0
+      this.handleIncorrectGuess()
     }
 
     this.updateScore()
     this.startNewRound()
+  }
+
+  /**
+   * Handles a correct guess from the user.
+   */
+  handleCorrectGuess () {
+    this.gameView.showSuccessFeedback()
+    this.score++
+  }
+
+  /**
+   * Handles an incorrect guess from the user.
+   */
+  handleIncorrectGuess () {
+    this.gameView.showFailureFeedback()
+    this.score = 0
   }
 
   /**
