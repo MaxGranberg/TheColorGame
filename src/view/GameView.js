@@ -59,6 +59,7 @@ class GameView {
    */
   displayFeedbackMessage (feedbackMessage) {
     this.feedbackMessage.textContent = feedbackMessage
+    setTimeout(() => { this.clearFeedbackMessage() }, 3000)
   }
 
   /**
@@ -73,6 +74,13 @@ class GameView {
    */
   showFailureFeedback () {
     this.displayFeedbackMessage('Wrong!')
+  }
+
+  /**
+   * Clears the feedback message.
+   */
+  clearFeedbackMessage () {
+    this.feedbackMessage.textContent = ''
   }
 }
 
