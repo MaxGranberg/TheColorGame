@@ -68,7 +68,16 @@ body {
 	transform: translateY(0);
 }
 
+
+#bestScore {
+	font-family: 'Roboto', sans-serif;
+	font-style: italic;
+	color: #333;
+}
+
 #score {
+	position: fixed;
+	margin-top: 320px;
 	font-family: 'Roboto', sans-serif;
 	font-style: italic;
 	color: #333;
@@ -120,5 +129,5 @@ h1 {
 #feedback {
 	color: #777;
 	font-size: 1.2em;
-	margin-top: 20px;
+	margin-top: 10px;
 }

@@ -17,7 +17,7 @@ export default class GameController {
     this.gameView = view
 
     this.score = 0
-    this.#rgbStringToGuess = this.randomColorModel.getRgbString()
+    this.bestScore = 0
 
     this.gameView.addEventListenerToOptions(this.handleClickOnOptions.bind(this))
   }
@@ -26,6 +26,7 @@ export default class GameController {
    * Start the game by showing rgb string to guess.
    */
   startGame () {
+    this.#rgbStringToGuess = this.randomColorModel.getRgbString()
     this.gameView.displayRgbString(this.#rgbStringToGuess)
 
     const answerOptions = this.generateAnswerOptions()
@@ -75,6 +76,7 @@ export default class GameController {
     }
 
     this.updateScore()
+    this.updateBestScore()
     this.startNewRound()
   }
 
@@ -84,6 +86,10 @@ export default class GameController {
   handleCorrectGuess () {
     this.gameView.showSuccessFeedback()
     this.score++
+
+    if (this.bestScore < this.score) {
+      this.bestScore = this.score
+    }
   }
 
   /**
@@ -99,6 +105,13 @@ export default class GameController {
    */
   updateScore () {
     this.gameView.updateScore(this.score)
+  }
+
+  /**
+   * Updates the users best score.
+   */
+  updateBestScore () {
+    this.gameView.updateBestScore(this.bestScore)
   }
 
   /**

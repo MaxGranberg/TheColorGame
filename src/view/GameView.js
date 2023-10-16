@@ -10,6 +10,7 @@ class GameView {
     this.rgbStringToGuess = document.querySelector('#rgbStringToGuess')
     this.answerOptions = document.querySelectorAll('.option')
     this.feedbackMessage = document.querySelector('#feedback')
+    this.bestScore = document.querySelector('#bestScore')
   }
 
   /**
@@ -53,13 +54,22 @@ class GameView {
   }
 
   /**
+   * Updates the best score for the user.
+   *
+   * @param {number} score - How many correct guesses the user has had as most.
+   */
+  updateBestScore (score) {
+    this.bestScore.textContent = `Your best score: ${score}`
+  }
+
+  /**
    * Displays a feedback message to the user based on its guess.
    *
    * @param {string} feedbackMessage - The message to present to the user.
    */
   displayFeedbackMessage (feedbackMessage) {
     this.feedbackMessage.textContent = feedbackMessage
-    setTimeout(() => { this.clearFeedbackMessage() }, 3000)
+    setTimeout(() => { this.clearFeedbackMessage() }, 2000)
   }
 
   /**
