@@ -19,6 +19,7 @@ body {
 }
 
 #navbar {
+	display: flex;
   width: 100%;
   position: fixed;
   top: 0;
@@ -27,6 +28,8 @@ body {
   padding: 10px 0;
   z-index: 10;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	justify-content: space-between;
+  align-items: center;
 }
 
 .nav-content {
@@ -35,6 +38,13 @@ body {
   color: white;
   font-size: 1.5em;
   font-family: 'Roboto', sans-serif;
+}
+
+#changeColorBtn {
+  background: none;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
 }
 
 h1 {
