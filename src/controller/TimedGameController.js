@@ -21,7 +21,6 @@ class TimedGameController extends GameController {
     this.updateBestScore(this.score)
 
     this.timedGameView = view
-    this.timedGameView.restartButton.addEventListener('click', () => { this.restartGame() })
   }
 
   /**
@@ -30,15 +29,6 @@ class TimedGameController extends GameController {
   startGame () {
     super.startGame()
     this.startTimer()
-  }
-
-  /**
-   * Restarts the game.
-   */
-  restartGame () {
-    this.timedGameView.hideRestartButton()
-    this.timedGameView.clearFeedbackMessage()
-    this.startNewRound()
   }
 
   /**
@@ -75,8 +65,6 @@ class TimedGameController extends GameController {
    */
   handleTimeout () {
     this.timedGameView.showTimeoutFeedback()
-    this.score = 0
-    this.updateScore()
   }
 
   /**

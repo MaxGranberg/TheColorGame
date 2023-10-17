@@ -15,8 +15,6 @@ class TimedGameView extends GameView {
 
     this.score = document.querySelector('#score')
     this.score.style.marginTop = '370px'
-
-    this.restartButton = document.querySelector('#restartButton')
   }
 
   /**
@@ -42,20 +40,6 @@ class TimedGameView extends GameView {
   showTimeoutFeedback () {
     this.displayTimeoutMessage()
     this.showRestartButton()
-  }
-
-  /**
-   * Displays a restart button.
-   */
-  showRestartButton () {
-    this.restartButton.style.display = 'flex'
-  }
-
-  /**
-   * Hides the restart button.
-   */
-  hideRestartButton () {
-    this.restartButton.style.display = 'none'
   }
 }
 export default TimedGameView

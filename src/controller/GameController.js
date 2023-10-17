@@ -21,7 +21,9 @@ export default class GameController {
     this.bestScore = localStorage.getItem(this.localStorageKey) || 0
     this.updateBestScore(this.score)
 
-    this.gameView.addEventListenerToOptions(this.handleClickOnOptions.bind(this))
+    this.boundHandleClickOnOptions = this.handleClickOnOptions.bind(this)
+    this.gameView.addEventListenerToOptions(this.boundHandleClickOnOptions)
+    this.gameView.restartButton.addEventListener('click', () => { this.restartGame() })
   }
 
   /**
@@ -33,6 +35,26 @@ export default class GameController {
 
     const answerOptions = this.generateAnswerOptions()
     this.gameView.updateAnswerOptionColors(answerOptions)
+  }
+
+  /**
+   * Restarts the game.
+   */
+  restartGame () {
+    this.gameView.hideRestartButton()
+    this.gameView.clearFeedbackMessage()
+    this.gameView.addEventListenerToOptions(this.boundHandleClickOnOptions)
+    this.score = 0
+    this.updateScore()
+    this.startNewRound()
+  }
+
+  /**
+   * Starts a new round by generating a new rgb string to guess.
+   */
+  startNewRound () {
+    this.randomColorModel.updateRgbString()
+    this.startGame()
   }
 
   /**
@@ -73,13 +95,13 @@ export default class GameController {
     const userChoice = event.target.style.backgroundColor.replace(/\s/g, '') // TODO: Probably fix module so it adds whitespaces to the rgb strings instead!
     if (userChoice === this.#rgbStringToGuess) {
       this.handleCorrectGuess()
+      this.startNewRound()
+      this.updateScore()
     } else {
       this.handleIncorrectGuess()
     }
 
-    this.updateScore()
     this.updateBestScore()
-    this.startNewRound()
   }
 
   /**
@@ -100,7 +122,10 @@ export default class GameController {
    */
   handleIncorrectGuess () {
     this.gameView.showFailureFeedback()
-    this.score = 0
+    this.gameView.showRestartButton()
+    this.gameView.answerOptions.forEach(option => {
+      option.removeEventListener('click', this.boundHandleClickOnOptions)
+    })
   }
 
   /**
@@ -115,13 +140,5 @@ export default class GameController {
    */
   updateBestScore () {
     this.gameView.updateBestScore(this.bestScore)
-  }
-
-  /**
-   * Starts a new round by generating a new rgb string to guess.
-   */
-  startNewRound () {
-    this.randomColorModel.updateRgbString()
-    this.startGame()
   }
 }

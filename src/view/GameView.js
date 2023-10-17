@@ -11,6 +11,7 @@ class GameView {
     this.answerOptions = document.querySelectorAll('.option')
     this.feedbackMessage = document.querySelector('#feedback')
     this.bestScore = document.querySelector('#bestScore')
+    this.restartButton = document.querySelector('#restartButton')
   }
 
   /**
@@ -69,7 +70,6 @@ class GameView {
    */
   displayFeedbackMessage (feedbackMessage) {
     this.feedbackMessage.textContent = feedbackMessage
-    setTimeout(() => { this.clearFeedbackMessage() }, 2000)
   }
 
   /**
@@ -83,7 +83,8 @@ class GameView {
    * Displays feeback if user guess wrong.
    */
   showFailureFeedback () {
-    this.displayFeedbackMessage('Wrong!')
+    this.displayFeedbackMessage('Wrong! Try again')
+    this.showRestartButton()
   }
 
   /**
@@ -91,6 +92,20 @@ class GameView {
    */
   clearFeedbackMessage () {
     this.feedbackMessage.textContent = ''
+  }
+
+  /**
+   * Displays a restart button.
+   */
+  showRestartButton () {
+    this.restartButton.style.display = 'flex'
+  }
+
+  /**
+   * Hides the restart button.
+   */
+  hideRestartButton () {
+    this.restartButton.style.display = 'none'
   }
 }
 

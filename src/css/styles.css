@@ -60,7 +60,7 @@ body {
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	height: 100%;
+	height: min-content;
 }
 
 #navbar {
@@ -183,11 +183,13 @@ h1 {
 
 #restartButton {
 	display: none;
+	justify-content: center;
 	background-color: #007BFF;
 	border: 1px solid black;
 	color: white;
 	padding: 10px 20px;
-	margin: 15px;
+	margin: auto;
+	margin-top: 30px;
 	border-radius: 4px;
 	font-size: 1.2em;
 	cursor: pointer;
