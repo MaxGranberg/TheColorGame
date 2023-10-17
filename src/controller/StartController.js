@@ -1,7 +1,9 @@
 import RandomColor from '../model/RandomColor.js'
 import GameView from '../view/GameView.js'
 import StartView from '../view/StartView.js'
-import GameController from './GameController'
+import GameController from './GameController.js'
+import TimedGameController from './TimedGameController.js'
+import TimedGameView from '../view/TimedGameView.js'
 
 /**
  *

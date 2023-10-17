@@ -1,4 +1,3 @@
-
 import RandomColor from './model/RandomColor.js'
 import ColorThemeView from './view/ColorThemeView.js'
 import ColorThemeController from './controller/ColorThemeController.js'
