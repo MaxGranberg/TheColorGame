@@ -16,6 +16,10 @@ class TimedGameController extends GameController {
     super(model, view)
     this.timeLimit = 10 // TODO: change this to use my module with NumberGenerator?
 
+    this.localStorageKey = 'timedBestScore'
+    this.bestScore = localStorage.getItem(this.localStorageKey) || 0
+    this.updateBestScore(this.score)
+
     this.timedGameView = view
     this.timedGameView.restartButton.addEventListener('click', () => { this.restartGame() })
   }
