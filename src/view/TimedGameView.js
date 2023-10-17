@@ -31,17 +31,16 @@ class TimedGameView extends GameView {
   /**
    * Displays a feedback message to the user based on its guess.
    *
-   * @param {string} feedbackMessage - The message to present to the user.
    */
-  displayFeedbackMessage (feedbackMessage) {
-    this.feedbackMessage.textContent = feedbackMessage
+  displayTimeoutMessage () {
+    this.feedbackMessage.textContent = 'The time went out! Try again'
   }
 
   /**
    * Displays a message when timer runs out.
    */
   showTimeoutFeedback () {
-    this.displayFeedbackMessage('The time went out! Try again')
+    this.displayTimeoutMessage()
     this.showRestartButton()
   }
 
