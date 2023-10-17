@@ -180,3 +180,27 @@ h1 {
 	color: red;
 	font-weight: bold;
 }
+
+#restartButton {
+	display: none;
+	background-color: #007BFF;
+	border: 1px solid black;
+	color: white;
+	padding: 10px 20px;
+	margin: 15px;
+	border-radius: 4px;
+	font-size: 1.2em;
+	cursor: pointer;
+	transition: background-color 0.2s, transform 0.2s;
+	box-shadow: 1px 0 2px  black;
+	text-shadow: 1px 0  rgba(0, 0, 0, 0.2), -1px 0 rgba(0, 0, 0, 0.2), 0 1px  rgba(0, 0, 0, 0.2), 0 -1px  rgba(0, 0, 0, 0.2);
+}
+
+#restartButton:hover {
+	background-color: #0056b3;
+	transform: translateY(-2px);
+}
+
+#restartButton:active {
+	transform: translateY(1px);
+}

@@ -11,11 +11,12 @@ class TimedGameView extends GameView {
     super()
     this.timer = document.createElement('p')
     this.timer.setAttribute('id', 'timer')
+    document.querySelector('#app').insertBefore(this.timer, this.rgbStringToGuess)
 
     this.score = document.querySelector('#score')
     this.score.style.marginTop = '370px'
 
-    document.querySelector('#app').insertBefore(this.timer, this.rgbStringToGuess)
+    this.restartButton = document.querySelector('#restartButton')
   }
 
   /**
@@ -28,10 +29,34 @@ class TimedGameView extends GameView {
   }
 
   /**
+   * Displays a feedback message to the user based on its guess.
+   *
+   * @param {string} feedbackMessage - The message to present to the user.
+   */
+  displayFeedbackMessage (feedbackMessage) {
+    this.feedbackMessage.textContent = feedbackMessage
+  }
+
+  /**
    * Displays a message when timer runs out.
    */
   showTimeoutFeedback () {
     this.displayFeedbackMessage('The time went out! Try again')
+    this.showRestartButton()
+  }
+
+  /**
+   * Displays a restart button.
+   */
+  showRestartButton () {
+    this.restartButton.style.display = 'flex'
+  }
+
+  /**
+   * Hides the restart button.
+   */
+  hideRestartButton () {
+    this.restartButton.style.display = 'none'
   }
 }
 export default TimedGameView

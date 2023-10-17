@@ -15,6 +15,9 @@ class TimedGameController extends GameController {
   constructor (model, view) {
     super(model, view)
     this.timeLimit = 10 // TODO: change this to use my module with NumberGenerator?
+
+    this.timedGameView = view
+    this.timedGameView.restartButton.addEventListener('click', () => { this.restartGame() })
   }
 
   /**
@@ -26,15 +29,36 @@ class TimedGameController extends GameController {
   }
 
   /**
+   * Restarts the game.
+   */
+  restartGame () {
+    this.timedGameView.hideRestartButton()
+    this.timedGameView.clearFeedbackMessage()
+    this.startNewRound()
+  }
+
+  /**
+   * Starts a new round after the user has picked an answer.
+   */
+  startNewRound () {
+    super.startNewRound()
+    this.startTimer()
+  }
+
+  /**
    * Starts the timer for the game.
    */
   startTimer () {
+    if (this.timer) {
+      clearInterval(this.timer) // If a timer exists, clear it
+    }
+
     this.currentTime = this.timeLimit
-    this.gameView.updateTimer(this.currentTime)
+    this.timedGameView.updateTimer(this.currentTime)
 
     this.timer = setInterval(() => {
       this.currentTime--
-      this.gameView.updateTimer(this.currentTime)
+      this.timedGameView.updateTimer(this.currentTime)
       if (this.currentTime <= 0) {
         clearInterval(this.timer)
         this.handleTimeout()
@@ -46,10 +70,9 @@ class TimedGameController extends GameController {
    * Handle what happends when the timer runs out.
    */
   handleTimeout () {
-    this.gameView.showTimeoutFeedback()
+    this.timedGameView.showTimeoutFeedback()
     this.score = 0
     this.updateScore()
-    this.startNewRound()
   }
 
   /**
@@ -58,8 +81,8 @@ class TimedGameController extends GameController {
    * @param {Event} event - A click event.
    */
   handleClickOnOptions (event) {
-    super.handleClickOnOptions(event)
     clearInterval(this.timer)
+    super.handleClickOnOptions(event)
   }
 }
 export default TimedGameController
