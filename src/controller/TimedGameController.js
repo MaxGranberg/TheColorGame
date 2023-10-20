@@ -1,6 +1,7 @@
 import GameController from './GameController.js'
 import RandomColor from '../model/RandomColor.js'
 import TimedGameView from '../view/TimedGameView.js'
+import { NumberGenerator } from 'randomly-generate'
 
 /**
  *
@@ -14,7 +15,7 @@ class TimedGameController extends GameController {
    */
   constructor (model, view) {
     super(model, view)
-    this.timeLimit = 10 // TODO: change this to use my module with NumberGenerator?
+    this.numberGenerator = new NumberGenerator()
 
     this.localStorageKey = 'timedBestScore'
     this.bestScore = localStorage.getItem(this.localStorageKey) || 0
@@ -28,6 +29,7 @@ class TimedGameController extends GameController {
    */
   startGame () {
     super.startGame()
+    this.timeLimit = this.numberGenerator.generateRandomNumber(5, 10)
     this.startTimer()
   }
 
@@ -44,7 +46,7 @@ class TimedGameController extends GameController {
    */
   startTimer () {
     if (this.timer) {
-      clearInterval(this.timer) // If a timer exists, clear it
+      clearInterval(this.timer) // If a timer already exists, clear it.
     }
 
     this.currentTime = this.timeLimit
