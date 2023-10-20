@@ -117,7 +117,7 @@ export default class GameController {
    * @param {Event} event - A click event
    */
   handleClickOnOptions (event) {
-    const userChoice = event.target.style.backgroundColor.replace(/\s/g, '') // TODO: Probably fix module so it adds whitespaces to the rgb strings instead!
+    const userChoice = event.target.style.backgroundColor
     if (userChoice === this.#rgbStringToGuess) {
       this.handleCorrectGuess()
       this.startNewRound()
