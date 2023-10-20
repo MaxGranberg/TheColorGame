@@ -10,6 +10,7 @@ class ColorThemeView {
     this.changeColorButton = document.querySelector('#changeColorBtn')
     this.rgbStringToGuess = document.querySelector('#rgbStringToGuess')
     this.gamemodeButtons = document.querySelectorAll('.gamemodeButton')
+    this.restartButton = document.querySelector('#restartButton')
   }
 
   /**
@@ -30,6 +31,7 @@ class ColorThemeView {
     this.changeGamemodeButtonColor(newColor)
     this.changeNavbarColor(newColor)
     this.changeRgbStringColor(newColor)
+    this.changeRestartButtonColor(newColor)
   }
 
   /**
@@ -59,6 +61,15 @@ class ColorThemeView {
    */
   changeRgbStringColor (newColor) {
     this.rgbStringToGuess.style.color = newColor
+  }
+
+  /**
+   * Changes the color of the restart button to a random one.
+   *
+   * @param {string} newColor - The color to change to.
+   */
+  changeRestartButtonColor (newColor) {
+    this.restartButton.style.backgroundColor = newColor
   }
 }
 export default ColorThemeView
