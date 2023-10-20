@@ -23,13 +23,21 @@ export default class GameController {
 
     this.boundHandleClickOnOptions = this.handleClickOnOptions.bind(this)
     this.gameView.addEventListenerToOptions(this.boundHandleClickOnOptions)
-    this.gameView.restartButton.addEventListener('click', () => { this.restartGame() })
+
+    this.boundRestartButton = this.restartGame.bind(this)
+    this.gameView.restartButton.addEventListener('click', this.boundRestartButton)
+
+    this.gameView.backToStartButton.addEventListener('backToStartRequest', () => {
+      this.destroyGameSession()
+      this.gameView.showStartPage()
+    })
   }
 
   /**
    * Start the game by showing rgb string to guess.
    */
   startGame () {
+    this.gameView.hideRestartButton()
     this.#rgbStringToGuess = this.randomColorModel.getRgbString()
     this.gameView.displayRgbString(this.#rgbStringToGuess)
 
@@ -55,6 +63,23 @@ export default class GameController {
   startNewRound () {
     this.randomColorModel.updateRgbString()
     this.startGame()
+  }
+
+  /**
+   * Destroys a game session when a user goes back to the start page.
+   */
+  destroyGameSession () {
+    this.gameView.answerOptions.forEach(option => {
+      option.removeEventListener('click', this.boundHandleClickOnOptions)
+    })
+
+    this.gameView.restartButton.removeEventListener('click', this.boundRestartButton)
+
+    this.score = 0
+    this.gameView.updateScore(this.score)
+    this.gameView.clearFeedbackMessage()
+    this.gameView.hideRestartButton()
+    this.randomColorModel.updateRgbString() // So there will be a new rgb string next time user starts the game.
   }
 
   /**

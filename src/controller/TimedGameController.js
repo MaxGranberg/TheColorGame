@@ -65,6 +65,10 @@ class TimedGameController extends GameController {
    */
   handleTimeout () {
     this.timedGameView.showTimeoutFeedback()
+    this.timedGameView.showRestartButton()
+    this.timedGameView.answerOptions.forEach(option => {
+      option.removeEventListener('click', this.boundHandleClickOnOptions)
+    })
   }
 
   /**
@@ -75,6 +79,15 @@ class TimedGameController extends GameController {
   handleClickOnOptions (event) {
     clearInterval(this.timer)
     super.handleClickOnOptions(event)
+  }
+
+  /**
+   * Destroys the game session when the user goes back to the start page.
+   */
+  destroyGameSession () {
+    super.destroyGameSession()
+    clearInterval(this.timer)
+    this.timedGameView.timer.remove()
   }
 }
 export default TimedGameController

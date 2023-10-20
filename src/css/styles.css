@@ -86,6 +86,23 @@ body {
 	text-shadow: 1px 0  rgba(0, 0, 0, 0.2), -1px 0 rgba(0, 0, 0, 0.2), 0 1px  rgba(0, 0, 0, 0.2), 0 -1px  rgba(0, 0, 0, 0.2);
 }
 
+#backToStart {
+	display: none;
+	background-color: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	color: white;
+	padding: 6px 12px;
+	border-radius: 4px;
+	font-size: 1em;
+	font-family: 'Roboto', sans-serif;
+	transition: background-color 0.2s, transform 0.2s;
+	cursor: pointer;
+	outline: none;
+	margin-right: auto;
+	text-shadow: 1px 0  rgba(0, 0, 0, 0.2), -1px 0 rgba(0, 0, 0, 0.2), 0 1px  rgba(0, 0, 0, 0.2), 0 -1px  rgba(0, 0, 0, 0.2);
+	box-shadow: 1px 0  rgba(0, 0, 0, 0.2), -1px 0 rgba(0, 0, 0, 0.5), 0 1px  rgba(0, 0, 0, 0.5), 0 -1px  rgba(0, 0, 0, 0.5);
+}
+
 #changeColorBtn {
 	background-color: rgba(255, 255, 255, 0.1);
 	border: 1px solid rgba(255, 255, 255, 0.3);
@@ -102,12 +119,12 @@ body {
 	box-shadow: 1px 0  rgba(0, 0, 0, 0.2), -1px 0 rgba(0, 0, 0, 0.5), 0 1px  rgba(0, 0, 0, 0.5), 0 -1px  rgba(0, 0, 0, 0.5);
 }
 
-#changeColorBtn:hover {
+#changeColorBtn:hover #backToStart:hover {
 	background-color: rgba(255, 255, 255, 0.2);
 	transform: translateY(-2px);
 }
 
-#changeColorBtn:active {
+#changeColorBtn:active #backToStart:active {
 	background-color: rgba(255, 255, 255, 0.3);
 	transform: translateY(0);
 }

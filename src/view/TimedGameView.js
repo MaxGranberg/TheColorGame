@@ -39,7 +39,6 @@ class TimedGameView extends GameView {
    */
   showTimeoutFeedback () {
     this.displayTimeoutMessage()
-    this.showRestartButton()
   }
 }
 export default TimedGameView

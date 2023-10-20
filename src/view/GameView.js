@@ -12,6 +12,30 @@ class GameView {
     this.feedbackMessage = document.querySelector('#feedback')
     this.bestScore = document.querySelector('#bestScore')
     this.restartButton = document.querySelector('#restartButton')
+
+    this.score.style.marginTop = '320px'
+
+    this.backToStartButton = document.querySelector('#backToStart')
+    this.backToStartButton.style.display = 'flex'
+    this.backToStartButton.addEventListener('click', () => {
+      this.goBackToStartPage()
+      this.backToStartButton.style.display = 'none'
+    })
+  }
+
+  /**
+   * Show the start page.
+   */
+  showStartPage () {
+    document.querySelector('#startPage').style.display = 'flex'
+  }
+
+  /**
+   * Dispatch a custom event when user wants to go back to the start page.
+   */
+  goBackToStartPage () {
+    const event = new Event('backToStartRequest')
+    this.backToStartButton.dispatchEvent(event)
   }
 
   /**
@@ -84,7 +108,6 @@ class GameView {
    */
   showFailureFeedback () {
     this.displayFeedbackMessage('Wrong! Try again')
-    this.showRestartButton()
   }
 
   /**
