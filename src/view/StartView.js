@@ -3,7 +3,7 @@
  */
 class StartView {
   /**
-   * Initializes a new instance of the GameView class.
+   * Initializes a new instance of the StartView class.
    */
   constructor () {
     this.startView = document.querySelector('#startPage')

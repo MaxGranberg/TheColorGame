@@ -10,7 +10,7 @@ class RandomColor {
    */
   constructor () {
     this.colorGenerator = new ColorGenerator()
-    this.#rgbStringOfColor = this.generateRgbString()
+    this.#rgbStringOfColor = this.generateNewRgbString()
   }
 
   /**
@@ -18,8 +18,15 @@ class RandomColor {
    *
    * @returns {string} - the rgb string of the color.
    */
-  generateRgbString () {
+  generateNewRgbString () {
     return this.colorGenerator.generateRandomRGBColor()
+  }
+
+  /**
+   * Generates a new rgb color string.
+   */
+  updateRgbString () {
+    this.#rgbStringOfColor = this.colorGenerator.generateRandomRGBColor()
   }
 
   /**
@@ -29,13 +36,6 @@ class RandomColor {
    */
   getRgbString () {
     return this.#rgbStringOfColor
-  }
-
-  /**
-   * Generates a new rgb color string.
-   */
-  updateRgbString () {
-    this.#rgbStringOfColor = this.colorGenerator.generateRandomRGBColor()
   }
 }
 

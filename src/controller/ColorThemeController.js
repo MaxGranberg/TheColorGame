@@ -15,7 +15,7 @@ class ColorThemeController {
     this.model = model
     this.view = view
 
-    this.view.addEventListenerToButton(this.handleColorChangeRequest.bind(this))
+    this.view.addColorChangeEventListener(this.handleColorChangeRequest.bind(this))
   }
 
   /**
@@ -23,7 +23,7 @@ class ColorThemeController {
    *
    */
   handleColorChangeRequest () {
-    const newColor = this.model.generateRgbString()
+    const newColor = this.model.generateNewRgbString()
     this.view.updateColorTheme(newColor)
   }
 }

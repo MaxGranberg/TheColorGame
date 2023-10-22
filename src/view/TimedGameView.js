@@ -4,17 +4,19 @@ import GameView from './GameView.js'
  *
  */
 class TimedGameView extends GameView {
+  #timerElement
+  #score
   /**
    * Initializes a new instance of the TimedGameView class.
    */
   constructor () {
     super()
-    this.timer = document.createElement('p')
-    this.timer.setAttribute('id', 'timer')
-    document.querySelector('#app').insertBefore(this.timer, this.rgbStringToGuess)
+    this.#timerElement = document.createElement('p')
+    this.#timerElement.setAttribute('id', 'timer')
+    document.querySelector('#app').insertBefore(this.#timerElement, this.rgbStringToGuess)
 
-    this.score = document.querySelector('#score')
-    this.score.style.marginTop = '370px'
+    this.#score = document.querySelector('#score')
+    this.#score.style.marginTop = '370px'
   }
 
   /**
@@ -23,7 +25,14 @@ class TimedGameView extends GameView {
    * @param {number} currentTime - The time left of the timer.
    */
   updateTimer (currentTime) {
-    this.timer.textContent = `Time left: ${currentTime}`
+    this.#timerElement.textContent = `Time left: ${currentTime}`
+  }
+
+  /**
+   *
+   */
+  removeTimerElement () {
+    this.#timerElement.remove()
   }
 
   /**
@@ -32,13 +41,6 @@ class TimedGameView extends GameView {
    */
   displayTimeoutMessage () {
     this.feedbackMessage.textContent = 'The time went out! Try again'
-  }
-
-  /**
-   * Displays a message when timer runs out.
-   */
-  showTimeoutFeedback () {
-    this.displayTimeoutMessage()
   }
 }
 export default TimedGameView

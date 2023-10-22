@@ -7,6 +7,10 @@ import { NumberGenerator } from 'randomly-generate'
  *
  */
 class TimedGameController extends GameController {
+  #MIN_TIME_LIMIT = 5
+  #MAX_TIME_LIMIT = 10
+  #timer
+  #currentTime
   /**
    * Initializes a new instance of the GameController class.
    *
@@ -29,7 +33,7 @@ class TimedGameController extends GameController {
    */
   startGame () {
     super.startGame()
-    this.timeLimit = this.numberGenerator.generateRandomNumber(5, 10)
+    this.timeLimit = this.numberGenerator.generateRandomNumber(this.#MIN_TIME_LIMIT, this.#MAX_TIME_LIMIT)
     this.startTimer()
   }
 
@@ -45,18 +49,18 @@ class TimedGameController extends GameController {
    * Starts the timer for the game.
    */
   startTimer () {
-    if (this.timer) {
-      clearInterval(this.timer) // If a timer already exists, clear it.
+    if (this.#timer) {
+      clearInterval(this.#timer) // If a timer already exists, clear it.
     }
 
-    this.currentTime = this.timeLimit
-    this.timedGameView.updateTimer(this.currentTime)
+    this.#currentTime = this.timeLimit
+    this.timedGameView.updateTimer(this.#currentTime)
 
-    this.timer = setInterval(() => {
-      this.currentTime--
-      this.timedGameView.updateTimer(this.currentTime)
-      if (this.currentTime <= 0) {
-        clearInterval(this.timer)
+    this.#timer = setInterval(() => {
+      this.#currentTime--
+      this.timedGameView.updateTimer(this.#currentTime)
+      if (this.#currentTime <= 0) {
+        clearInterval(this.#timer)
         this.handleTimeout()
       }
     }, 1000)
@@ -66,7 +70,7 @@ class TimedGameController extends GameController {
    * Handle what happends when the timer runs out.
    */
   handleTimeout () {
-    this.timedGameView.showTimeoutFeedback()
+    this.timedGameView.displayTimeoutMessage()
     this.timedGameView.showRestartButton()
     this.timedGameView.answerOptions.forEach(option => {
       option.removeEventListener('click', this.boundHandleClickOnOptions)
@@ -79,7 +83,7 @@ class TimedGameController extends GameController {
    * @param {Event} event - A click event.
    */
   handleClickOnOptions (event) {
-    clearInterval(this.timer)
+    clearInterval(this.#timer)
     super.handleClickOnOptions(event)
   }
 
@@ -88,8 +92,8 @@ class TimedGameController extends GameController {
    */
   destroyGameSession () {
     super.destroyGameSession()
-    clearInterval(this.timer)
-    this.timedGameView.timer.remove()
+    clearInterval(this.#timer)
+    this.timedGameView.removeTimerElement()
   }
 }
 export default TimedGameController

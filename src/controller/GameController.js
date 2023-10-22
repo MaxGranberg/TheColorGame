@@ -21,16 +21,33 @@ export default class GameController {
     this.bestScore = localStorage.getItem(this.localStorageKey) || 0
     this.updateBestScore(this.score)
 
+    this.setupEventListeners()
+  }
+
+  /**
+   *
+   */
+  setupEventListeners () {
     this.boundHandleClickOnOptions = this.handleClickOnOptions.bind(this)
     this.gameView.addEventListenerToOptions(this.boundHandleClickOnOptions)
 
-    this.boundRestartButton = this.restartGame.bind(this)
-    this.gameView.restartButton.addEventListener('click', this.boundRestartButton)
+    this.boundRestartGame = this.restartGame.bind(this)
+    this.gameView.restartButton.addEventListener('click', this.boundRestartGame)
 
-    this.gameView.backToStartButton.addEventListener('backToStartRequest', () => {
-      this.destroyGameSession()
-      this.gameView.showStartPage()
+    this.boundHandleBackToStartClick = this.handleBackToStartClick.bind(this)
+    this.gameView.addEventListenerToBackToStartButton(this.boundHandleBackToStartClick)
+  }
+
+  /**
+   *
+   */
+  removeEventListeners () {
+    this.gameView.answerOptions.forEach(option => {
+      option.removeEventListener('click', this.boundHandleClickOnOptions)
     })
+
+    this.gameView.restartButton.removeEventListener('click', this.boundRestartGame)
+    this.gameView.backToStartButton.removeEventListener('click', this.boundHandleBackToStartClick)
   }
 
   /**
@@ -58,7 +75,7 @@ export default class GameController {
   }
 
   /**
-   * Starts a new round by generating a new rgb string to guess.
+   * Starts a new round by updating the rgb string to guess.
    */
   startNewRound () {
     this.randomColorModel.updateRgbString()
@@ -66,14 +83,18 @@ export default class GameController {
   }
 
   /**
+   *
+   */
+  handleBackToStartClick () {
+    this.destroyGameSession()
+    this.gameView.showStartPage()
+  }
+
+  /**
    * Destroys a game session when a user goes back to the start page.
    */
   destroyGameSession () {
-    this.gameView.answerOptions.forEach(option => {
-      option.removeEventListener('click', this.boundHandleClickOnOptions)
-    })
-
-    this.gameView.restartButton.removeEventListener('click', this.boundRestartButton)
+    this.removeEventListeners()
 
     this.score = 0
     this.gameView.updateScore(this.score)
@@ -88,8 +109,8 @@ export default class GameController {
    * @returns {Array} - An array of rgb strings.
    */
   generateAnswerOptions () {
-    const answerOption1 = this.randomColorModel.generateRgbString()
-    const answerOption2 = this.randomColorModel.generateRgbString()
+    const answerOption1 = this.randomColorModel.generateNewRgbString()
+    const answerOption2 = this.randomColorModel.generateNewRgbString()
     const answerOption3 = this.#rgbStringToGuess
     const answerOptions = [answerOption1, answerOption2, answerOption3]
 

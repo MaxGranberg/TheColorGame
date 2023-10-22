@@ -2,25 +2,29 @@
  *
  */
 class GameView {
+  #score
   /**
    * Initializes a new instance of the GameView class.
    */
   constructor () {
-    this.score = document.querySelector('#score')
+    this.#score = document.querySelector('#score')
     this.rgbStringToGuess = document.querySelector('#rgbStringToGuess')
     this.answerOptions = document.querySelectorAll('.option')
     this.feedbackMessage = document.querySelector('#feedback')
     this.bestScore = document.querySelector('#bestScore')
     this.restartButton = document.querySelector('#restartButton')
 
-    this.score.style.marginTop = '320px'
+    this.#score.style.marginTop = '320px'
 
     this.backToStartButton = document.querySelector('#backToStart')
     this.backToStartButton.style.display = 'flex'
-    this.backToStartButton.addEventListener('click', () => {
-      this.goBackToStartPage()
-      this.backToStartButton.style.display = 'none'
-    })
+  }
+
+  /**
+   *
+   */
+  addEventListenerToBackToStartButton (callback) {
+    this.backToStartButton.addEventListener('click', callback)
   }
 
   /**
@@ -28,14 +32,7 @@ class GameView {
    */
   showStartPage () {
     document.querySelector('#startPage').style.display = 'flex'
-  }
-
-  /**
-   * Dispatch a custom event when user wants to go back to the start page.
-   */
-  goBackToStartPage () {
-    const event = new Event('backToStartRequest')
-    this.backToStartButton.dispatchEvent(event)
+    this.backToStartButton.style.display = 'none'
   }
 
   /**
@@ -75,7 +72,7 @@ class GameView {
    * @param {number} score - How many correct guesses the user currently has.
    */
   updateScore (score) {
-    this.score.textContent = `Score: ${score}`
+    this.#score.textContent = `Score: ${score}`
   }
 
   /**

@@ -18,7 +18,7 @@ class ColorThemeView {
    *
    * @param {Function} callback - The callback to execute when the button is clicked.
    */
-  addEventListenerToButton (callback) {
+  addColorChangeEventListener (callback) {
     this.changeColorButton.addEventListener('click', callback)
   }
 
