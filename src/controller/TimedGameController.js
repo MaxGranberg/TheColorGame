@@ -3,9 +3,6 @@ import RandomColor from '../model/RandomColor.js'
 import TimedGameView from '../view/TimedGameView.js'
 import { NumberGenerator } from 'randomly-generate'
 
-/**
- *
- */
 class TimedGameController extends GameController {
   #MIN_TIME_LIMIT = 5
   #MAX_TIME_LIMIT = 10
@@ -28,37 +25,32 @@ class TimedGameController extends GameController {
     this.timedGameView = view
   }
 
-  /**
-   * Starts the game with its corresponding timer.
-   */
   startGame () {
     super.startGame()
+    
     this.timeLimit = this.numberGenerator.generateRandomNumber(this.#MIN_TIME_LIMIT, this.#MAX_TIME_LIMIT)
     this.startTimer()
   }
 
   /**
-   * Starts a new round after the user has picked an answer.
+   * Need to start a new round after the user has picked an answer.
    */
   startNewRound () {
     super.startNewRound()
     this.startTimer()
   }
 
-  /**
-   * Starts the timer for the game.
-   */
   startTimer () {
     if (this.#timer) {
-      clearInterval(this.#timer) // If a timer already exists, clear it.
+      clearInterval(this.#timer) // If a timer already exists, need to clear it.
     }
 
     this.#currentTime = this.timeLimit
-    this.timedGameView.updateTimer(this.#currentTime)
+    this.timedGameView.updateTimerElement(this.#currentTime)
 
     this.#timer = setInterval(() => {
       this.#currentTime--
-      this.timedGameView.updateTimer(this.#currentTime)
+      this.timedGameView.updateTimerElement(this.#currentTime)
       if (this.#currentTime <= 0) {
         clearInterval(this.#timer)
         this.handleTimeout()
@@ -66,30 +58,19 @@ class TimedGameController extends GameController {
     }, 1000)
   }
 
-  /**
-   * Handle what happends when the timer runs out.
-   */
   handleTimeout () {
     this.timedGameView.displayTimeoutMessage()
     this.timedGameView.showRestartButton()
     this.timedGameView.answerOptions.forEach(option => {
-      option.removeEventListener('click', this.boundHandleClickOnOptions)
+      option.removeEventListener('click', this.boundHandleClickOnAnswers)
     })
   }
 
-  /**
-   * Handle what happends when user clicks on an answer option.
-   *
-   * @param {Event} event - A click event.
-   */
-  handleClickOnOptions (event) {
+  handleClickOnAnswers (event) {
     clearInterval(this.#timer)
-    super.handleClickOnOptions(event)
+    super.handleClickOnAnswers(event)
   }
 
-  /**
-   * Destroys the game session when the user goes back to the start page.
-   */
   destroyGameSession () {
     super.destroyGameSession()
     clearInterval(this.#timer)

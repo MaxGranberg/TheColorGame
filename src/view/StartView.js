@@ -1,10 +1,7 @@
 /**
- *
+ * The view for the start page of the application.
  */
 class StartView {
-  /**
-   * Initializes a new instance of the StartView class.
-   */
   constructor () {
     this.startView = document.querySelector('#startPage')
     this.classicGamemode = document.querySelector('#classicMode')
@@ -21,9 +18,6 @@ class StartView {
     this.timedGamemode.addEventListener('click', callback)
   }
 
-  /**
-   * Hides the start view.
-   */
   hideStartView () {
     this.startView.style.display = 'none'
   }

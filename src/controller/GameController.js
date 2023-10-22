@@ -2,10 +2,11 @@ import GameView from '../view/GameView.js'
 import RandomColor from '../model/RandomColor.js'
 
 /**
- *
+ * This class is the controller for the classic gamemode.
  */
-export default class GameController {
+class GameController {
   #rgbStringToGuess
+
   /**
    * Initializes a new instance of the GameController class.
    *
@@ -24,12 +25,9 @@ export default class GameController {
     this.setupEventListeners()
   }
 
-  /**
-   *
-   */
   setupEventListeners () {
-    this.boundHandleClickOnOptions = this.handleClickOnOptions.bind(this)
-    this.gameView.addEventListenerToOptions(this.boundHandleClickOnOptions)
+    this.boundHandleClickOnAnswers = this.handleClickOnAnswers.bind(this)
+    this.gameView.addEventListenerToAnswers(this.boundHandleClickOnAnswers)
 
     this.boundRestartGame = this.restartGame.bind(this)
     this.gameView.restartButton.addEventListener('click', this.boundRestartGame)
@@ -38,80 +36,59 @@ export default class GameController {
     this.gameView.addEventListenerToBackToStartButton(this.boundHandleBackToStartClick)
   }
 
-  /**
-   *
-   */
   removeEventListeners () {
     this.gameView.answerOptions.forEach(option => {
-      option.removeEventListener('click', this.boundHandleClickOnOptions)
+      option.removeEventListener('click', this.boundHandleClickOnAnswers)
     })
 
     this.gameView.restartButton.removeEventListener('click', this.boundRestartGame)
     this.gameView.backToStartButton.removeEventListener('click', this.boundHandleBackToStartClick)
   }
 
-  /**
-   * Start the game by showing rgb string to guess.
-   */
   startGame () {
     this.gameView.hideRestartButton()
+    
     this.#rgbStringToGuess = this.randomColorModel.getRgbString()
     this.gameView.displayRgbString(this.#rgbStringToGuess)
 
     const answerOptions = this.generateAnswerOptions()
-    this.gameView.updateAnswerOptionColors(answerOptions)
+    this.gameView.updateAnswerOptionsColors(answerOptions)
   }
 
-  /**
-   * Restarts the game.
-   */
   restartGame () {
     this.gameView.hideRestartButton()
     this.gameView.clearFeedbackMessage()
-    this.gameView.addEventListenerToOptions(this.boundHandleClickOnOptions)
+    this.gameView.addEventListenerToAnswers(this.boundHandleClickOnAnswers)
     this.score = 0
     this.updateScore()
     this.startNewRound()
   }
 
-  /**
-   * Starts a new round by updating the rgb string to guess.
-   */
   startNewRound () {
     this.randomColorModel.updateRgbString()
     this.startGame()
   }
 
-  /**
-   *
-   */
   handleBackToStartClick () {
     this.destroyGameSession()
     this.gameView.showStartPage()
   }
 
-  /**
-   * Destroys a game session when a user goes back to the start page.
-   */
   destroyGameSession () {
     this.removeEventListeners()
 
     this.score = 0
-    this.gameView.updateScore(this.score)
+    this.gameView.updateCurrentScore(this.score)
     this.gameView.clearFeedbackMessage()
     this.gameView.hideRestartButton()
     this.randomColorModel.updateRgbString() // So there will be a new rgb string next time user starts the game.
   }
 
-  /**
-   * Generate the answer options for the game.
-   *
-   * @returns {Array} - An array of rgb strings.
-   */
   generateAnswerOptions () {
     const answerOption1 = this.randomColorModel.generateNewRgbString()
     const answerOption2 = this.randomColorModel.generateNewRgbString()
     const answerOption3 = this.#rgbStringToGuess
+   
     const answerOptions = [answerOption1, answerOption2, answerOption3]
 
     return this.shuffleAnswerOptions(answerOptions)
@@ -135,9 +112,9 @@ export default class GameController {
   /**
    * Handle when user clicks on an answer option.
    *
-   * @param {Event} event - A click event
+   * @param {Event} event - A click event.
    */
-  handleClickOnOptions (event) {
+  handleClickOnAnswers (event) {
     const userChoice = event.target.style.backgroundColor
     if (userChoice === this.#rgbStringToGuess) {
       this.handleCorrectGuess()
@@ -150,9 +127,6 @@ export default class GameController {
     this.updateBestScore()
   }
 
-  /**
-   * Handles a correct guess from the user.
-   */
   handleCorrectGuess () {
     this.gameView.showSuccessFeedback()
     this.score++
@@ -163,28 +137,20 @@ export default class GameController {
     }
   }
 
-  /**
-   * Handles an incorrect guess from the user.
-   */
   handleIncorrectGuess () {
     this.gameView.showFailureFeedback()
     this.gameView.showRestartButton()
     this.gameView.answerOptions.forEach(option => {
-      option.removeEventListener('click', this.boundHandleClickOnOptions)
+      option.removeEventListener('click', this.boundHandleClickOnAnswers)
     })
   }
 
-  /**
-   * Updates the users score.
-   */
   updateScore () {
-    this.gameView.updateScore(this.score)
+    this.gameView.updateCurrentScore(this.score)
   }
 
-  /**
-   * Updates the users best score.
-   */
   updateBestScore () {
     this.gameView.updateBestScore(this.bestScore)
   }
 }
+export default GameController

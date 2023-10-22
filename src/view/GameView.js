@@ -1,11 +1,9 @@
 /**
- *
+ * The view for the classic gamemode.
  */
 class GameView {
   #score
-  /**
-   * Initializes a new instance of the GameView class.
-   */
+
   constructor () {
     this.#score = document.querySelector('#score')
     this.rgbStringToGuess = document.querySelector('#rgbStringToGuess')
@@ -20,16 +18,10 @@ class GameView {
     this.backToStartButton.style.display = 'flex'
   }
 
-  /**
-   *
-   */
   addEventListenerToBackToStartButton (callback) {
     this.backToStartButton.addEventListener('click', callback)
   }
 
-  /**
-   * Show the start page.
-   */
   showStartPage () {
     document.querySelector('#startPage').style.display = 'flex'
     this.backToStartButton.style.display = 'none'
@@ -37,93 +29,59 @@ class GameView {
 
   /**
    * Displays the RGB string that the user is supposed to guess.
-   *
-   * @param {string} rgbString - The RGB string the user will guess on.
    */
   displayRgbString (rgbString) {
     this.rgbStringToGuess.textContent = rgbString
   }
 
-  /**
-   * Updates the colors/answer options that a user can choose from.
-   *
-   * @param {Array} colors - An array of RGB color strings.
-   */
-  updateAnswerOptionColors (colors) {
+  updateAnswerOptionsColors (colors) {
     colors.forEach((color, index) => {
       this.answerOptions[index].style.backgroundColor = color
     })
   }
 
   /**
-   * Add eventlisteneres to the options.
+   * Add eventlisteneres to the answer options.
    *
    * @param {Function} callback - The callback to execute when an option is clicked.
    */
-  addEventListenerToOptions (callback) {
+  addEventListenerToAnswers (callback) {
     this.answerOptions.forEach(option => {
       option.addEventListener('click', callback)
     })
   }
 
-  /**
-   * Updates the current score for the user.
-   *
-   * @param {number} score - How many correct guesses the user currently has.
-   */
-  updateScore (score) {
+  updateCurrentScore (score) {
     this.#score.textContent = `Score: ${score}`
   }
 
   /**
-   * Updates the best score for the user.
-   *
-   * @param {number} score - How many correct guesses the user has had as most.
+   * Updates the best score for the user playing.
    */
   updateBestScore (score) {
     this.bestScore.textContent = `Your best score: ${score}`
   }
 
-  /**
-   * Displays a feedback message to the user based on its guess.
-   *
-   * @param {string} feedbackMessage - The message to present to the user.
-   */
   displayFeedbackMessage (feedbackMessage) {
     this.feedbackMessage.textContent = feedbackMessage
   }
 
-  /**
-   * Displays a message when user guesses correctly.
-   */
   showSuccessFeedback () {
     this.displayFeedbackMessage('Correct!')
   }
 
-  /**
-   * Displays feeback if user guess wrong.
-   */
   showFailureFeedback () {
     this.displayFeedbackMessage('Wrong! Try again')
   }
 
-  /**
-   * Clears the feedback message.
-   */
   clearFeedbackMessage () {
     this.feedbackMessage.textContent = ''
   }
 
-  /**
-   * Displays a restart button.
-   */
   showRestartButton () {
     this.restartButton.style.display = 'flex'
   }
 
-  /**
-   * Hides the restart button.
-   */
   hideRestartButton () {
     this.restartButton.style.display = 'none'
   }

@@ -1,9 +1,6 @@
 import RandomColor from '../model/RandomColor.js'
 import ColorThemeView from '../view/ColorThemeView.js'
 
-/**
- *
- */
 class ColorThemeController {
   /**
    * Initializes a new instance of the ColorThemeController class.
@@ -18,10 +15,6 @@ class ColorThemeController {
     this.view.addColorChangeEventListener(this.handleColorChangeRequest.bind(this))
   }
 
-  /**
-   * Handle when user clicks on the change color button.
-   *
-   */
   handleColorChangeRequest () {
     const newColor = this.model.generateNewRgbString()
     this.view.updateColorTheme(newColor)

@@ -1,14 +1,12 @@
 import GameView from './GameView.js'
 
 /**
- *
+ * The view for the timed gamemode who extends the classic gamemode view. 
  */
 class TimedGameView extends GameView {
   #timerElement
   #score
-  /**
-   * Initializes a new instance of the TimedGameView class.
-   */
+
   constructor () {
     super()
     this.#timerElement = document.createElement('p')
@@ -19,26 +17,14 @@ class TimedGameView extends GameView {
     this.#score.style.marginTop = '370px'
   }
 
-  /**
-   * Updates the timer element.
-   *
-   * @param {number} currentTime - The time left of the timer.
-   */
-  updateTimer (currentTime) {
+  updateTimerElement (currentTime) {
     this.#timerElement.textContent = `Time left: ${currentTime}`
   }
 
-  /**
-   *
-   */
   removeTimerElement () {
     this.#timerElement.remove()
   }
 
-  /**
-   * Displays a feedback message to the user based on its guess.
-   *
-   */
   displayTimeoutMessage () {
     this.feedbackMessage.textContent = 'The time went out! Try again'
   }

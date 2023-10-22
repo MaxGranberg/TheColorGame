@@ -5,6 +5,7 @@ import { ColorGenerator } from 'randomly-generate'
  */
 class RandomColor {
   #rgbStringOfColor
+
   /**
    * Initializes a new instance of RandomColor class and generates a random rgb color string.
    */
@@ -13,27 +14,14 @@ class RandomColor {
     this.#rgbStringOfColor = this.generateNewRgbString()
   }
 
-  /**
-   * Generates a random rgb color string.
-   *
-   * @returns {string} - the rgb string of the color.
-   */
   generateNewRgbString () {
     return this.colorGenerator.generateRandomRGBColor()
   }
 
-  /**
-   * Generates a new rgb color string.
-   */
   updateRgbString () {
     this.#rgbStringOfColor = this.colorGenerator.generateRandomRGBColor()
   }
 
-  /**
-   * Get the rgb string of the color generated.
-   *
-   * @returns {string} - the rgb string of the color.
-   */
   getRgbString () {
     return this.#rgbStringOfColor
   }

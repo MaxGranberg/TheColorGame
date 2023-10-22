@@ -15,7 +15,6 @@
   "author": "Max Granberg <mg224em@student.lnu.se>",
   "license": "MIT",
   "devDependencies": {
-    "@lnu/eslint-config": "^1.1.10",
     "vite": "^4.4.11"
   },
   "dependencies": {

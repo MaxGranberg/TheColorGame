@@ -6,7 +6,7 @@ import TimedGameController from './TimedGameController.js'
 import TimedGameView from '../view/TimedGameView.js'
 
 /**
- *
+ * This is the controller for the start page of the application.
  */
 class StartController {
   /**
@@ -40,18 +40,12 @@ class StartController {
     }
   }
 
-  /**
-   * Handle a classic gamemode choice.
-   */
   handleClassicGamemodeChoice () {
     const gameView = new GameView()
     const classicGameController = new GameController(this.randomColormodel, gameView)
     classicGameController.startGame()
   }
 
-  /**
-   * Handle a timed gamemode choice.
-   */
   handleTimedGamemodeChoice () {
     const timedGameView = new TimedGameView()
     const timedGameController = new TimedGameController(this.randomColormodel, timedGameView)
