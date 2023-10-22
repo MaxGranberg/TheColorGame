@@ -15,11 +15,11 @@ class RandomColor {
   }
 
   generateNewRgbString () {
-    return this.colorGenerator.generateRandomRGBColor()
+    return this.colorGenerator.generateRandomRGBString()
   }
 
   updateRgbString () {
-    this.#rgbStringOfColor = this.colorGenerator.generateRandomRGBColor()
+    this.#rgbStringOfColor = this.colorGenerator.generateRandomRGBString()
   }
 
   getRgbString () {
