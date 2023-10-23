@@ -1,5 +1,5 @@
 # TheColorGame 🎨
-TheColorGame is a web application that combines play with learning, focusing on enhancing the user's understanding of RGB color values.
+[TheColorGame](https://thergbcolorgame.netlify.app/) is a web application that combines play with learning, focusing on enhancing the user's understanding of RGB color values.
 
 # Features 🌟
 
